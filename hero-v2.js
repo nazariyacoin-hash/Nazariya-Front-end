@@ -393,7 +393,6 @@
           '</div>' +
           '<div class="ftr__col">' +
             '<a href="https://instagram.com/aka.nazariya" target="_blank" rel="noreferrer">instagram &#8599;</a>' +
-            '<a href="#top">back to top &#8593;</a>' +
           '</div>' +
         '</nav>' +
       '</div>' +
