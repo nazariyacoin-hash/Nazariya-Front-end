@@ -397,7 +397,6 @@
         '</nav>' +
       '</div>' +
       '<div class="ftr__card">' +
-        '<p class="ftr__credit">&copy; 2026 Nazariya &mdash; perspective defines identity.</p>' +
         '<a class="ftr__cta" href="mailto:' + FTR_EMAIL + '" data-hover>work together?</a>' +
         '<h3 class="ftr__nl">Perspective box</h3>' +
         '<form class="ftr__form" novalidate>' +
@@ -415,7 +414,8 @@
             '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l1.6 4.2-2.2 1.6a13 13 0 0 0 5.8 5.8l1.6-2.2L20 15v4a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></a>' +
         '</div>' +
       '</div>' +
-      '<p class="ftr__fine">we promise, it changes everything without changing anything.</p>';
+      '<p class="ftr__fine">we promise, it changes everything without changing anything.</p>' +
+      '<p class="ftr__credit">&copy; 2026 Nazariya &mdash; perspective defines identity.</p>';
   }
 
   function mountFooter() {
