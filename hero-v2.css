@@ -1,0 +1,521 @@
+/* ---------------------------------------------------------
+   hero v2 — centered headline over a flowing card conveyor
+   (BrandLyft-style hero, rebuilt with Nazariya tokens)
+   Injected on top of the compiled bundle by hero-v2.js
+   --------------------------------------------------------- */
+
+/* hide the original hero only once the v2 script has mounted */
+html.has-hero-v2 main > section.hero { display: none !important; }
+
+/* page tweaks: drop the red word-marquee under the hero */
+main > .marquee--red { display: none !important; }
+
+/* remove the bundle's legacy in-page services section (stamp shelf); the
+   nav's "work" link now points at the svc2 folder strip (#services) */
+html.has-hero-v2 main > section.services { display: none !important; }
+
+/* nav: drop the "multimedia agency" tagline under the wordmark,
+   and let the wordmark itself breathe a little larger */
+.nav__tag { display: none !important; }
+.nav__wordmark { font-size: 1.7rem; }
+
+/* about section: heading now reads "what defines us" (patched in the
+   bundle) — dial down the oversized heading and the body copy */
+.about__title { font-size: clamp(2.4rem, 6.5vw, 5rem); }
+.about__lead  { font-size: clamp(1.35rem, 2.5vw, 2.15rem); }
+.about__para  { font-size: clamp(1rem, 1.25vw, 1.2rem); }
+
+/* about section: soft pale-straw background (matched to supplied swatch) */
+.about.bg-butter { background: #ece6bd; }
+/* and tighten the generous spacing (padding + kicker/heading/body gaps) */
+.about {
+  padding-top: clamp(2.6rem, 5vw, 4rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.about__head {
+  margin-top: 0.35rem;
+  margin-bottom: clamp(1.2rem, 2.2vw, 1.8rem);
+  gap: 0.6rem 2rem;
+}
+
+/* nav: stay visible while scrolling down (bundle slides it away
+   via .is-hidden); the scrolled state keeps its glass backdrop */
+header.nav.is-hidden { transform: none !important; }
+header.nav.is-solid {
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  backdrop-filter: blur(14px) saturate(1.25);
+  box-shadow: 0 1px 0 rgba(33, 31, 26, 0.07), 0 12px 32px rgba(33, 31, 26, 0.07);
+}
+
+/* cursor: a medium dot instead of the arrow + big ring */
+.cursor-ring { display: none !important; }
+.cursor-dot svg { display: none !important; }
+.cursor-dot {
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.hero-v2 {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: clamp(5.2rem, 8vh, 6.6rem) 0 clamp(1.6rem, 3.5vh, 2.6rem);
+  overflow: hidden;
+}
+
+.hv2__inner {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 2 * var(--pad), 1080px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* headline */
+.hv2__title {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 420;
+  font-size: clamp(2.7rem, 6.2vw, 6.1rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.hv2__line {
+  display: block;
+  overflow: hidden;
+  /* extra bottom padding so script descenders (the g in "Talking")
+     aren't clipped by the entrance mask; margin compensates */
+  padding: 0.05em 0.08em 0.24em;
+  margin-bottom: -0.24em;
+}
+.hv2__line > span { display: inline-block; will-change: transform; }
+.hv2__title em {
+  font-style: normal;
+  font-family: var(--font-script);
+  color: var(--red);
+  font-size: 1.12em;
+  line-height: 0.8;
+  padding: 0 0.08em;
+}
+
+/* sub copy */
+.hv2__sub {
+  max-width: 94ch;
+  margin: clamp(0.9rem, 2vh, 1.4rem) 0 0;
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.3vw, 1.26rem);
+  line-height: 1.42;
+  color: var(--ink-soft);
+}
+
+/* card conveyor */
+.hv2__belt {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  margin-top: clamp(1.2rem, 2.6vh, 2rem);
+  contain: layout;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.hv2__belt.is-grabbing { cursor: grabbing; }
+.hv2__card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+.hv2__card-in {
+  overflow: hidden;
+  border-radius: clamp(12px, 1.5vw, 20px);
+  box-shadow: 0 22px 44px rgba(33, 31, 26, 0.22);
+  background: var(--cream-deep);
+}
+.hv2__card-in img,
+.hv2__card-in video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------- entrance ---------------- */
+.hero-v2 .hv2__sub {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: 0.5s;
+}
+.hero-v2 .hv2__line > span {
+  transform: translateY(115%);
+  transition: transform 1s var(--ease);
+}
+.hero-v2 .hv2__line:nth-child(2) > span { transition-delay: 0.12s; }
+.hero-v2 .hv2__card-in {
+  transform: translateY(130%) rotate(4deg);
+  transition: transform 0.9s var(--ease);
+}
+
+html.hv2-in .hero-v2 .hv2__sub { opacity: 1; transform: translateY(0); }
+html.hv2-in .hero-v2 .hv2__line > span { transform: translateY(0); }
+html.hv2-in .hero-v2 .hv2__card-in { transform: translateY(0) rotate(0deg); }
+
+@media (max-width: 900px) {
+  .hv2__br { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-v2 .hv2__sub,
+  .hero-v2 .hv2__line > span,
+  .hero-v2 .hv2__card-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------
+   footer — "let's connect" rebuilt as a cream card on maroon
+   (see mountFooter in hero-v2.js). Replaces the bundle's
+   contact section, which is hidden below.
+   --------------------------------------------------------- */
+html.has-hero-v2 main > section.contact { display: none !important; }
+
+.ftr {
+  position: relative;
+  z-index: 1;
+  background: var(--red-deep);
+  color: var(--cream);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+  margin-top: calc(-1 * var(--radius-panel));
+  padding: clamp(3.4rem, 7vw, 6rem) var(--pad) clamp(1.4rem, 3vw, 2.4rem);
+}
+/* folder tab rising off the section's top edge (reference: manila-folder
+   silhouette against the cream page above) */
+.ftr::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * clamp(26px, 3.2vw, 40px) + 1px);
+  left: 56%;
+  width: clamp(170px, 24vw, 330px);
+  height: clamp(26px, 3.2vw, 40px);
+  background: var(--red-deep);
+  clip-path: polygon(clamp(18px, 2.4vw, 30px) 0, calc(100% - clamp(18px, 2.4vw, 30px)) 0, 100% 100%, 0 100%);
+}
+
+/* top: brand + link columns on the maroon field */
+.ftr__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(2rem, 5vw, 5rem);
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.4rem, 5vw, 4rem);
+}
+.ftr__brand { display: flex; align-items: center; gap: 1rem; }
+.ftr__brand img { border-radius: 50%; display: block; }
+.ftr__name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  letter-spacing: 0.01em;
+  color: var(--cream);
+}
+.ftr__cols {
+  display: flex;
+  gap: clamp(2.4rem, 6vw, 7rem);
+  flex-wrap: wrap;
+}
+.ftr__col { display: flex; flex-direction: column; gap: 0.85rem; }
+.ftr__col a {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0.92;
+  transition: opacity 0.25s var(--ease);
+}
+.ftr__col a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+
+.ftr__credit {
+  position: absolute;
+  top: calc(-1 * clamp(30px, 3.6vw, 42px));
+  right: clamp(4px, 1vw, 14px);
+  margin: 0;
+  font-family: var(--font-stamp);
+  font-size: clamp(0.62rem, 0.9vw, 0.74rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.85;
+}
+
+/* the big cream card — paper sitting inside the folder: a raised tab on
+   the left (holding the wordmark) with the credit floating in the notch */
+.ftr__card {
+  position: relative;
+  margin-top: clamp(44px, 5.4vw, 60px);
+  background: var(--white);
+  color: var(--ink);
+  border-radius: 0 clamp(20px, 2.6vw, 36px) clamp(20px, 2.6vw, 36px) clamp(20px, 2.6vw, 36px);
+  padding: clamp(1.2rem, 2.6vw, 2.2rem) clamp(1.4rem, 3.5vw, 3.2rem) clamp(1.4rem, 2.6vw, 2.2rem);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.22);
+}
+.ftr__card::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * clamp(40px, 5vw, 56px) + 1px);
+  left: 0;
+  width: min(46%, 520px);
+  height: clamp(41px, 5.1vw, 57px);
+  background: var(--white);
+  border-top-left-radius: clamp(18px, 2.2vw, 28px);
+  clip-path: polygon(0 0, calc(100% - 36px) 0, 100% 100%, 0 100%);
+}
+.ftr__cta {
+  position: absolute;
+  top: clamp(1.2rem, 2.6vw, 2.2rem);
+  right: clamp(1.2rem, 2.6vw, 2.2rem);
+  background: var(--red-bright);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(165, 42, 28, 0.35);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+.ftr__cta:hover { background: var(--red); transform: translateY(-2px); }
+
+.ftr__nl {
+  margin: clamp(0.6rem, 1.6vw, 1.4rem) 0 1rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.6vw, 3.2rem);
+  letter-spacing: -0.01em;
+  color: var(--red);
+}
+.ftr__form {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--red-deep);
+  border-radius: 999px;
+  padding: 0.35rem 0.45rem 0.35rem 1.4rem;
+  max-width: 480px;
+}
+.ftr__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  padding: 0.65rem 0;
+}
+.ftr__input::placeholder { color: rgba(245, 239, 228, 0.55); }
+.ftr__send {
+  flex: none;
+  border: none;
+  background: transparent;
+  color: var(--red-bright);
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease);
+}
+.ftr__send:hover { transform: translateX(4px); }
+
+.ftr__note {
+  margin: 1.1rem 0 0;
+  max-width: 52ch;
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 1vw, 0.92rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.ftr__ig {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 0.25s var(--ease);
+}
+.ftr__ig:hover { border-color: var(--red); }
+.ftr__socials {
+  position: absolute;
+  right: clamp(1.2rem, 2.6vw, 2.2rem);
+  bottom: clamp(1.2rem, 2.4vw, 2rem);
+  display: flex;
+  gap: 0.9rem;
+}
+.ftr__socials a { color: var(--ink); opacity: 0.85; transition: opacity 0.25s var(--ease), transform 0.25s var(--ease); }
+.ftr__socials a:hover { opacity: 1; transform: translateY(-2px); }
+.ftr__socials svg { display: block; }
+
+.ftr__fine {
+  margin: 0.8rem 0 0;
+  font-family: var(--font-script);
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  color: var(--cream);
+  opacity: 0.9;
+}
+
+@media (max-width: 760px) {
+  .ftr__cols { gap: 1.6rem 2.4rem; }
+  .ftr__credit { font-size: 0.56rem; right: 2px; }
+  .ftr__cta { position: static; display: inline-block; margin: 0.4rem 0 1.2rem; }
+  .ftr__socials { position: static; margin-top: 1.4rem; justify-content: flex-end; }
+}
+
+/* ---------------------------------------------------------
+   about — "what defines us" as a playful centred statement
+   (see mountAbout in hero-v2.js). Big serif line with inline
+   doodle icons, curly arrows into a dashed box, sign-off.
+   Replaces the bundle's about section, hidden below.
+   --------------------------------------------------------- */
+html.has-hero-v2 main > section.about { display: none !important; }
+
+.abt {
+  position: relative;
+  z-index: 1;
+  background: #ece6bd;
+  color: var(--ink);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+  margin-top: calc(-1 * var(--radius-panel));
+  padding: clamp(2.8rem, 5.5vw, 4.6rem) var(--pad) clamp(2.4rem, 4.6vw, 3.6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+.abt__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: clamp(1.6rem, 3vw, 2.6rem);
+}
+.abt__kicker i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+.abt__statement {
+  max-width: 880px;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 420;
+  font-size: clamp(1.25rem, 2.3vw, 2.05rem);
+  line-height: 1.42;
+  color: var(--ink);
+}
+.abt__ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.1em;
+  padding: 0.14em 0.18em;
+  vertical-align: -0.14em;
+  border-radius: 48% 52% 55% 45% / 55% 48% 52% 45%;
+}
+.abt__ic svg { width: 100%; height: 100%; display: block; }
+.abt__ic--eye   { background: var(--butter); color: var(--ink); transform: rotate(-4deg); }
+.abt__ic--spark { background: var(--red); color: var(--cream); transform: rotate(8deg); }
+.abt__ic--mega  { background: #dfe5d3; color: var(--ink); transform: rotate(-6deg); }
+
+/* curly hand-drawn arrows pointing into the box */
+.abt__arrow {
+  position: absolute;
+  color: var(--ink-2);
+  width: clamp(70px, 9vw, 120px);
+  height: auto;
+}
+.abt__arrow--l { left: clamp(2%, 7vw, 12%); top: 42%; }
+.abt__arrow--r { right: clamp(2%, 7vw, 12%); top: 34%; }
+
+/* dashed box */
+.abt__box {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(2.2rem, 4.4vw, 3.8rem);
+  width: min(100%, 660px);
+  border: 2.5px dashed var(--red-bright);
+  border-radius: clamp(18px, 2.2vw, 28px);
+  padding: clamp(1.6rem, 3.2vw, 2.8rem) clamp(1.2rem, 3vw, 2.6rem);
+}
+.abt__label {
+  display: inline-block;
+  background: var(--butter);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(0.72rem, 1vw, 0.85rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+}
+.abt__q {
+  margin: 1rem auto 1.4rem;
+  max-width: 24ch;
+  font-family: var(--font-serif);
+  font-weight: 420;
+  font-size: clamp(1.3rem, 2.3vw, 2rem);
+  line-height: 1.15;
+  color: var(--ink);
+}
+.abt__cta {
+  display: inline-block;
+  background: var(--red-bright);
+  color: var(--white);
+  font-family: var(--font-stamp);
+  font-size: clamp(0.72rem, 0.95vw, 0.84rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(165, 42, 28, 0.3);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+.abt__cta:hover { background: var(--red-deep); transform: translateY(-2px); }
+
+.abt__foot {
+  margin: clamp(2.4rem, 4.6vw, 4rem) 0 0;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.3vw, 1.15rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .abt__arrow { display: none; }
+}

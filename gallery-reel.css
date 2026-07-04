@@ -1,0 +1,56 @@
+/* ---------------------------------------------------------
+   gallery two-row reel — the work grid now renders as TWO
+   media-reel rows that scroll in OPPOSITE directions (the
+   reverse is driven by GSAP in the bundle's reel component).
+   This just stacks the two full-bleed rows with a gap.
+   --------------------------------------------------------- */
+.media-reels {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.9rem, 2vw, 1.7rem);
+}
+
+/* no captions on the gallery pictures — image tiles only (also lets each
+   tile hug its image, removing the cream side-gap portraits used to get) */
+.mreel-tile__cap { display: none !important; }
+
+/* ---- mobile nav ------------------------------------------------------
+   The bundle hides the desktop nav row on small screens and its old
+   "explore the desk" chip menu is dead legacy markup — so phones had no
+   way to navigate. Show the 3 short links inline (they fit next to the
+   logo) instead of relying on the missing hamburger. */
+@media (max-width: 880px) {
+  .nav .nav__links {
+    display: flex !important;
+    position: static;
+    left: auto;
+    transform: none;
+    gap: 0.9rem;
+    /* no margin-left:auto while the CTA is visible — let the header's
+       space-between distribute logo · links · CTA so "about" never
+       collides with the "let's connect" pill */
+  }
+  .nav .nav__link { font-size: 0.82rem; white-space: nowrap; }
+  .nav .nav__link span { white-space: nowrap; }
+}
+/* small phones: the bundle hides the CTA (<=560px), so push links to the edge */
+@media (max-width: 560px) {
+  .nav .nav__links { margin-left: auto; }
+}
+
+/* logo turns cream while the fixed header sits over a red hero (the JS in
+   hero-v2.js toggles .nav-on-red and swaps the mark image to its cream disc) */
+.nav__logo { transition: color 0.3s var(--ease); }
+.nav-on-red .nav__logo,
+.nav-on-red .nav__logo span { color: var(--cream); }
+
+/* category-page headings (web & digital / social media / everything / …) in
+   Inter, synced across every gallery title. Overrides the bundle's brush-font
+   .wcat__title.script; size reduced because Inter is far wider than the brush. */
+.wcat__title.script {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.6rem, 9vw, 8rem);
+  line-height: 0.94;
+}
