@@ -367,6 +367,76 @@
     legacy.parentNode.insertBefore(sec, legacy.nextSibling);
   }
 
+  // ---- by-the-numbers: animated stat band injected right after About --
+  function statsHtml() {
+    return '' +
+      '<div class="abtstats__inner">' +
+        '<span class="abtstats__kicker"><i></i>by the numbers</span>' +
+        '<div class="abtstats__grid">' +
+          '<div class="abtstats__item">' +
+            '<span class="abtstats__num" data-target="10000" data-suffix="+">0</span>' +
+            '<span class="abtstats__label">content delivered</span>' +
+          '</div>' +
+          '<span class="abtstats__div" aria-hidden="true"></span>' +
+          '<div class="abtstats__item">' +
+            '<span class="abtstats__num" data-target="50" data-suffix="+">0</span>' +
+            '<span class="abtstats__label">brands worked with</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+  function countUp(el) {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+    const suffix = el.getAttribute('data-suffix') || '';
+    const fmt = function (n) { return n.toLocaleString('en-US') + suffix; };
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { el.textContent = fmt(target); return; }
+    const dur = 1900;
+    let t0 = 0;
+    function step(now) {
+      if (!t0) t0 = now;
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(step);
+    // safety net: if rAF is throttled (background tab), still land the final value
+    setTimeout(function () { el.textContent = fmt(target); }, dur + 400);
+  }
+  function mountStats() {
+    if (document.getElementById('nz-stats')) return;
+    const about = document.querySelector('#about.abt');
+    const services = document.getElementById('services');
+    // wait until BOTH exist as siblings, then slot the band right before
+    // Services (= right after About), independent of mount order.
+    if (!about || !services || about.parentNode !== services.parentNode) return;
+    const sec = document.createElement('section');
+    sec.className = 'abtstats';
+    sec.id = 'nz-stats';
+    sec.setAttribute('aria-label', 'By the numbers');
+    sec.innerHTML = statsHtml();
+    services.parentNode.insertBefore(sec, services);
+    window.dispatchEvent(new Event('resize'));
+    const nums = sec.querySelectorAll('.abtstats__num');
+    // Lenis smooth-scroll makes IntersectionObserver / scroll events unreliable
+    // here, so rAF-poll the band's position (same tactic as the nav tick).
+    let started = false;
+    (function watch() {
+      if (started) return;
+      const r = sec.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (r.top < vh * 0.82 && r.bottom > vh * 0.12) {
+        started = true;
+        nums.forEach(countUp);
+        return;
+      }
+      setTimeout(watch, 200);
+    })();
+  }
+
   // ---- footer: "let's connect" rebuilt as a cream card on maroon ------
   // Reference: brand mark + tagline and link columns on the maroon field,
   // credit line, then a large rounded cream card holding a giant wordmark,
@@ -451,6 +521,7 @@
     if (main && main.querySelector('section.hero')) mount(main);
     const had = !!document.querySelector('.abt') && !!document.querySelector('.ftr');
     mountAbout();
+    mountStats();
     mountFooter();
     if (!had && document.querySelector('.abt')) {
       // our injected sections change the page height AFTER the bundle's

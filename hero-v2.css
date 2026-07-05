@@ -505,3 +505,82 @@ html.has-hero-v2 main > section.about { display: none !important; }
 @media (max-width: 860px) {
   .abt__arrow { display: none; }
 }
+
+/* ---------------------------------------------------------
+   by-the-numbers — animated stat band injected right after
+   About (see mountStats in hero-v2.js). Maroon panel that
+   tucks under About; big serif numerals count up on scroll.
+   --------------------------------------------------------- */
+.abtstats {
+  position: relative;
+  z-index: 1;
+  background: var(--red-deep);
+  color: var(--cream);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+  margin-top: calc(-1 * var(--radius-panel));
+  padding: clamp(3.4rem, 7vw, 6rem) var(--pad);
+}
+.abtstats__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.8rem, 4vw, 3.2rem);
+}
+.abtstats__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-stamp);
+  font-size: clamp(0.64rem, 0.95vw, 0.8rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.82;
+}
+.abtstats__kicker i {
+  width: clamp(24px, 3vw, 42px);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.abtstats__grid {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(1.6rem, 8vw, 7rem);
+  width: 100%;
+}
+.abtstats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+.abtstats__num {
+  font-family: var(--font-serif);
+  font-weight: 560;
+  font-size: clamp(3rem, 10vw, 6.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+}
+.abtstats__label {
+  font-family: var(--font-stamp);
+  font-size: clamp(0.7rem, 1.25vw, 0.98rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.abtstats__div {
+  width: 1px;
+  align-self: stretch;
+  min-height: clamp(70px, 11vw, 130px);
+  background: var(--cream);
+  opacity: 0.26;
+}
+@media (max-width: 600px) {
+  .abtstats__grid { flex-direction: column; align-items: center; gap: 2.4rem; }
+  .abtstats__div { width: clamp(60px, 34vw, 140px); height: 1px; min-height: 0; align-self: center; }
+}
