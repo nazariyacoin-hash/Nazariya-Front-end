@@ -227,7 +227,7 @@ html.has-hero-v2 main > section.contact { display: none !important; }
   gap: clamp(2.4rem, 6vw, 7rem);
   flex-wrap: wrap;
 }
-.ftr__col { display: flex; flex-direction: column; gap: 0.85rem; }
+.ftr__col { display: flex; flex-direction: column; align-items: flex-end; gap: 0.85rem; text-align: right; }
 .ftr__col a {
   font-family: var(--font-sans);
   font-weight: 500;

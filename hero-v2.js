@@ -371,7 +371,6 @@
   function statsHtml() {
     return '' +
       '<div class="abtstats__inner">' +
-        '<span class="abtstats__kicker"><i></i>by the numbers</span>' +
         '<div class="abtstats__grid">' +
           '<div class="abtstats__item">' +
             '<span class="abtstats__num" data-target="10000" data-suffix="+">0</span>' +
@@ -460,9 +459,6 @@
           '<div class="ftr__col">' +
             '<a href="mailto:' + FTR_EMAIL + '">' + FTR_EMAIL + '</a>' +
             '<a href="tel:+918796797254">+91 8796797254</a>' +
-          '</div>' +
-          '<div class="ftr__col">' +
-            '<a href="https://instagram.com/aka.nazariya" target="_blank" rel="noreferrer">instagram &#8599;</a>' +
           '</div>' +
         '</nav>' +
       '</div>' +
