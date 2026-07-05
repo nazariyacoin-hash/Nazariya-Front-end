@@ -457,8 +457,8 @@
             '<a href="/#services">services</a>' +
           '</div>' +
           '<div class="ftr__col">' +
-            '<a href="mailto:' + FTR_EMAIL + '">' + FTR_EMAIL + '</a>' +
             '<a href="tel:+918796797254">+91 8796797254</a>' +
+            '<a href="mailto:' + FTR_EMAIL + '">' + FTR_EMAIL + '</a>' +
           '</div>' +
         '</nav>' +
       '</div>' +
