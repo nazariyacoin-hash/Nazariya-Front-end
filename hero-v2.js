@@ -9,18 +9,18 @@
    --------------------------------------------------------- */
 (() => {
   const IMAGES = [
+    '/work/web/crevo-web.jpg',
+    '/work/content/nazariya-reel.mp4',
+    '/work/web/studio-woof.jpg',
+    '/work/social/reel-1.mp4',
+    '/work/web/interlined-web.jpg',
+    '/work/social/reel-4.mp4',
     '/work/print/dye-mag.jpg',
-    '/work/content/jtd-3.jpg',
-    '/work/social/wafflesome-2.mp4',
-    '/work/packaging/cutlery-pack.jpg',
-    '/work/social/reel-vackadoo-2.mp4',
-    '/work/content/texture-4.jpg',
-    '/work/social/wrii-1.jpg',
-    '/work/packaging/cards-2.jpg',
-    '/work/social/reel-vackadoo.mp4',
-    '/work/content/insta-feed.jpg',
     '/work/social/reel-wrii.mp4',
-    '/work/print/zine-disha-2.jpg',
+    '/work/social/wrii-1.jpg',
+    '/work/content/insta-feed.jpg',
+    '/work/packaging/cards-2.jpg',
+    '/work/content/jtd-3.jpg',
   ];
   const TILT = 14;               // rotation across the belt, deg edge-to-edge
   const MAX_FLICK = 5200;        // px/s cap on a thrown belt
