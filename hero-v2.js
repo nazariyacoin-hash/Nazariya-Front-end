@@ -376,11 +376,6 @@
             '<span class="abtstats__num" data-target="10000" data-suffix="+">0</span>' +
             '<span class="abtstats__label">content delivered</span>' +
           '</div>' +
-          '<span class="abtstats__div" aria-hidden="true"></span>' +
-          '<div class="abtstats__item">' +
-            '<span class="abtstats__num" data-target="50" data-suffix="+">0</span>' +
-            '<span class="abtstats__label">brands worked with</span>' +
-          '</div>' +
         '</div>' +
       '</div>';
   }
