@@ -4,6 +4,10 @@
    Injected on top of the compiled bundle by hero-v2.js
    --------------------------------------------------------- */
 
+/* Light-only site: stop browsers (e.g. Chrome/Android "auto dark") from
+   force-inverting the cream design into muddy dark colors. */
+html { color-scheme: light; }
+
 /* hide the original hero only once the v2 script has mounted */
 html.has-hero-v2 main > section.hero { display: none !important; }
 
