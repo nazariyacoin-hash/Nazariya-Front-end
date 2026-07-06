@@ -5,8 +5,9 @@
    --------------------------------------------------------- */
 
 /* Light-only site: stop browsers (e.g. Chrome/Android "auto dark") from
-   force-inverting the cream design into muddy dark colors. */
-html { color-scheme: light; }
+   force-inverting the cream design into muddy dark colors. The `only`
+   keyword is a hard request to the UA to apply NO automatic dark treatment. */
+html, body { color-scheme: only light !important; }
 
 /* hide the original hero only once the v2 script has mounted */
 html.has-hero-v2 main > section.hero { display: none !important; }
