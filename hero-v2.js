@@ -437,7 +437,7 @@
   // a "work together?" pill, Newsletter heading + email field, note text
   // and social icons. Replaces the bundle's contact section (hidden via
   // CSS); takes over its #connect anchor so nav links keep working.
-  const FTR_EMAIL = 'nazariya.co.in@gmail.com';
+  const FTR_EMAIL = 'contact@akanazariya.com';
 
   function ftrHtml() {
     return '' +
