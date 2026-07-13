@@ -438,6 +438,8 @@
   // and social icons. Replaces the bundle's contact section (hidden via
   // CSS); takes over its #connect anchor so nav links keep working.
   const FTR_EMAIL = 'contact@akanazariya.com';
+  const FTR_WA = '918796797254';   // WhatsApp number: country code + number, no "+" or spaces
+  const FTR_WA_MSG = "Hi Nazariya, I'd love to talk about a project.";
 
   function ftrHtml() {
     return '' +
@@ -469,6 +471,8 @@
         '<div class="ftr__socials">' +
           '<a href="https://instagram.com/aka.nazariya" target="_blank" rel="noreferrer" aria-label="Instagram">' +
             '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg></a>' +
+          '<a href="https://wa.me/' + FTR_WA + '?text=' + encodeURIComponent(FTR_WA_MSG) + '" target="_blank" rel="noreferrer" aria-label="WhatsApp">' +
+            '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a0.5 0.5 0 0 0 1 0v-1a0.5 0.5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a0.5 0.5 0 0 0 0 -1h-1a0.5 0.5 0 0 0 0 1"/></svg></a>' +
           '<a href="mailto:' + FTR_EMAIL + '" aria-label="Email">' +
             '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></a>' +
           '<a href="tel:+918796797254" aria-label="Phone">' +
