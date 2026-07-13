@@ -19,12 +19,13 @@
   // each panel: [title, gallery route id, prints from its own work/ dir]
   // clicking the folder opens that category's gallery page (/work/<id>)
   const SERVICES = [
-    ['Branding &<br>Identity', 'branding', ['/work/branding/connect-grow.jpg', '/work/branding/silver-brick.jpg', '/work/branding/du-litfest.jpg', '/work/branding/board-05.jpg']],
+    // TODO: swap these 4 placeholders for real /work/branding/* images once branding work is added
+    ['Branding &<br>Identity', 'branding', ['/work/packaging/heritage.jpg', '/work/packaging/the-glory.jpg', '/work/packaging/silent-conversations.jpg', '/work/packaging/reflections-of-the-soul.jpg']],
     ['Web &<br>Digital', 'web', ['/work/web/studio-woof.jpg', '/work/web/crevo-web.jpg', '/work/web/interlined-web.jpg', '/work/web/youfoundus.jpg']],
-    ['Content<br>Production', 'content', ['/work/content/golgappa-1.jpg', '/work/content/semal-1.jpg', '/work/content/colours-1.jpg', '/work/content/texture-1.jpg']],
-    ['Social<br>Media', 'social', ['/work/social/wrii-1.jpg', '/work/social/vackadoo-1.jpg', '/work/social/pauls-1.jpg', '/work/social/vackadoo2-1.jpg']],
-    ['Printing &<br>Collaterals', 'print', ['/work/print/dye-mag.jpg', '/work/print/zine-disha.jpg', '/work/print/mag-mockup.jpg', '/work/print/unipole-1.jpg']],
-    ['Design', 'packaging', ['/work/packaging/cutlery-pack.jpg', '/work/packaging/cards-1.jpg', '/work/packaging/cutlery-kit.jpg', '/work/packaging/cards-2.jpg']],
+    ['Content<br>Production', 'content', ['/work/content/golgappa-1.jpg', '/work/content/semal-2.jpg', '/work/content/colours-1.jpg', '/work/content/texture-1.jpg']],
+    ['Social<br>Media', 'social', ['/work/social/wrii-1.jpg', '/work/social/wrii-2.jpg', '/work/social/wrii-3.jpg', '/work/social/wrii-4.jpg']],
+    ['Printing &<br>Collaterals', 'print', ['/work/print/dye-mag.jpg', '/work/print/zine-disha.jpg', '/work/print/mag-mockup.jpg', '/work/print/zine-ishita.jpg']],
+    ['Design', 'packaging', ['/work/packaging/sabyasachi.jpg', '/work/packaging/cards-1.jpg', '/work/packaging/mcqueen.jpg', '/work/packaging/cards-2.jpg']],
   ];
   const COLOR_COUNT = 4;      // svc2__panel--c0..c3 in services-v2.css
   const DRIFT_LERP = 0.075;
