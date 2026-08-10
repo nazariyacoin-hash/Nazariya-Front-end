@@ -8,19 +8,24 @@
    bundle's own logic keeps working untouched.
    --------------------------------------------------------- */
 (() => {
+  // Belt uses small ".belt" variants of these pieces — the cards render at
+  // <=180px, so full ~1400px images / multi-MB videos were huge overkill.
+  // The .belt.jpg (~520px) and .belt.mp4 (~540px, no audio) files cut the
+  // home payload ~8MB -> ~1MB with no visible difference at card size.
+  // (Poster is auto-derived: .belt.mp4 -> .belt.poster.jpg, which exists.)
   const IMAGES = [
-    '/work/web/crevo-web.jpg',
-    '/work/content/nazariya-reel.mp4',
-    '/work/web/studio-woof.jpg',
-    '/work/social/reel-1.mp4',
-    '/work/web/interlined-web.jpg',
-    '/work/social/reel-4.mp4',
-    '/work/print/dye-mag.jpg',
-    '/work/social/reel-wrii.mp4',
-    '/work/social/wrii-1.jpg',
-    '/work/content/insta-feed.jpg',
-    '/work/packaging/cards-2.jpg',
-    '/work/content/jtd-3.jpg',
+    '/work/web/crevo-web.belt.jpg',
+    '/work/content/nazariya-reel.belt.mp4',
+    '/work/web/studio-woof.belt.jpg',
+    '/work/social/reel-1.belt.mp4',
+    '/work/web/interlined-web.belt.jpg',
+    '/work/social/reel-4.belt.mp4',
+    '/work/print/dye-mag.belt.jpg',
+    '/work/social/reel-wrii.belt.mp4',
+    '/work/social/wrii-1.belt.jpg',
+    '/work/content/insta-feed.belt.jpg',
+    '/work/packaging/cards-2.belt.jpg',
+    '/work/content/jtd-3.belt.jpg',
   ];
   const TILT = 14;               // rotation across the belt, deg edge-to-edge
   const MAX_FLICK = 5200;        // px/s cap on a thrown belt
