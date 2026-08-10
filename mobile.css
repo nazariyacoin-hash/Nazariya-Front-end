@@ -1,0 +1,110 @@
+/* =============================================================
+   mobile.css — phone optimisations for every section
+   Loaded LAST (after the bundle CSS + hero-v2/services-v2/
+   gallery-reel), so these rules win without touching the
+   compiled bundle. Scope: phones/tablets (<=768px) plus a few
+   touch-only rules keyed on `(hover: none)` for real devices.
+   ============================================================= */
+
+/* ---- global mobile hygiene ------------------------------------------ */
+@media (max-width: 768px) {
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  /* a soft branded tap flash instead of the default grey iOS block */
+  a, button, .svc2__panel, [data-hover] {
+    -webkit-tap-highlight-color: rgba(165, 42, 28, 0.14);
+  }
+}
+
+/* =============================================================
+   NAV — fit logo + 3 links comfortably down to 320px, and give
+   the links a real tap area (they were 17px tall).
+   ============================================================= */
+@media (max-width: 430px) {
+  .nav { padding-left: 16px; padding-right: 16px; }
+  .nav__wordmark { font-size: 1.3rem; }        /* was 1.7rem — frees width */
+  .nav .nav__links { gap: 0.7rem; }
+  .nav .nav__link { font-size: 0.8rem; }
+}
+/* very small phones: show only the logo mark so links never clip
+   the wordmark (the mark still reads as the Nazariya logo) */
+@media (max-width: 345px) {
+  .nav__wordmark { display: none; }
+}
+/* enlarge each link's hit area WITHOUT breaking the roll-up animation
+   (the link is height:1.3em / overflow:hidden, so padding would leak the
+   second span — grow the tappable region with a transparent overlay).
+   `hover:none` targets real touch devices; the width fallback keeps it
+   working on any narrow phone-sized viewport too. */
+@media (hover: none), (max-width: 768px) {
+  .nav__link { position: relative; }
+  .nav__link::after { content: ''; position: absolute; inset: -15px -5px; }
+}
+
+/* =============================================================
+   ABOUT — give the "let's talk" pill a full 44px tap target.
+   ============================================================= */
+@media (max-width: 768px) {
+  .abt__cta { padding-top: 0.85rem; padding-bottom: 0.85rem; }
+}
+
+/* =============================================================
+   STATS — the single figure gets more presence on a phone.
+   ============================================================= */
+@media (max-width: 600px) {
+  .abtstats__num { font-size: clamp(3.6rem, 18vw, 5rem); }
+}
+
+/* =============================================================
+   SERVICES — the swipe strip is a phone's weakest spot.
+   ============================================================= */
+/* Titles are faint grey (#cfc7b2) until a panel is hovered/opened. On a
+   touch device there is no hover, so every un-opened service name stayed
+   near-invisible. Show them in full ink by default; the tapped-open panel
+   still switches to its flood-ink colour (that rule is more specific). */
+@media (hover: none), (max-width: 768px) {
+  .svc2__title { color: var(--ink); }
+  /* keep the little "go" arrow visible so it's obvious a panel opens/links */
+  .svc2__go { opacity: 1; transform: none; }
+}
+/* let the first & last panel settle in the centre when swipe-snapping
+   (panels already use scroll-snap-align:center in touch mode). Gated so a
+   reduced-motion DESKTOP — which also receives .is-touch — stays flush. */
+@media (hover: none), (max-width: 768px) {
+  .svc2__vp.is-touch { scroll-padding-inline: 12vw; }
+  .svc2__vp.is-touch .svc2__strip { padding-inline: 12vw; }
+}
+
+/* =============================================================
+   FOOTER — bump every tiny control to a real tap target.
+   ============================================================= */
+/* 760px (not 768) so these engage exactly when hero-v2's stacked mobile
+   footer layout does — no in-between seam. */
+@media (max-width: 760px) {
+  /* >=16px so iOS Safari doesn't auto-zoom when the field is focused */
+  .ftr__input { font-size: 16px; }
+  .ftr__send { min-height: 44px; padding: 0.55rem 0.85rem; }
+  /* link columns / IG: taller rows -> ~47px tap targets */
+  .ftr__col a { padding: 0.72rem 0; }
+  .ftr__ig { padding: 0.78rem 0; }
+  /* "work together?" pill */
+  .ftr__cta { min-height: 44px; display: inline-flex; align-items: center; }
+  /* social icons: 20px glyphs -> ~42px hit areas */
+  .ftr__socials { gap: 0.5rem; }
+  .ftr__socials a { padding: 11px; }
+  /* readability: the note is a real sentence; the credit line was ~9px */
+  .ftr__note { font-size: 0.92rem; }
+  .ftr__credit { font-size: 0.7rem; }
+}
+
+/* =============================================================
+   WORK GALLERY — the "all work" back link needs a tap target,
+   and the spec list reads a touch small.
+   ============================================================= */
+@media (max-width: 768px) {
+  .wcat__back {
+    min-height: 44px;
+    align-items: center;
+    margin-bottom: clamp(1.2rem, 4vw, 2.2rem);
+  }
+  .wcat__spec { font-size: clamp(0.95rem, 3.4vw, 1.05rem); }
+}
