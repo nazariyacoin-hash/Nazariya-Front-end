@@ -1,46 +1,39 @@
 /* =============================================================
-   gallery-grid.css — /work galleries scroll DOWN as a masonry
-   grid instead of two sideways auto-scrolling reel rows.
-   Applies on ALL devices (per request).
+   gallery-grid.css — /work galleries as a uniform ALIGNED GRID
+   (scroll down). Every tile is the same size, rows line up, and
+   the bottom ends level — no ragged masonry gaps. Images crop to
+   fill each tile (object-fit:cover). All devices: 4 / 3 / 2 cols.
 
-   Structure of the reel (rendered by the bundle):
-     .media-reels > (1–2) .media-reel > .reel > .reel__track
-       > .reel__group (×2 identical seamless-loop copies)
-         > .mreel-tile > .mreel-tile__media > img|video
-
-   Approach: collapse every wrapper with `display:contents` so all
-   tiles become multi-column items of .media-reels; hide the
-   duplicate loop group so each piece shows once. The bundle's GSAP
-   horizontal tween then animates a box-less .reel__track = a visual
-   no-op, so no bundle/JS edits are needed.
+   The reel wrappers are flattened with display:contents so each
+   .mreel-tile becomes a direct grid item of .media-reels; the
+   duplicate seamless-loop group is hidden; the bundle's GSAP
+   horizontal tween then animates a box-less .reel__track (no-op).
    ============================================================= */
 .wcat__body .media-reels {
-  display: block;
-  column-count: 4;
-  column-gap: clamp(0.7rem, 1.4vw, 1.3rem);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.5rem, 1vw, 1rem);
 }
 .wcat__body .media-reel,
 .wcat__body .reel,
 .wcat__body .reel__track,
-.wcat__body .reel__group:first-child {
-  display: contents;
-}
+.wcat__body .reel__group:first-child { display: contents; }
 /* seamless-loop duplicate copy — hide so nothing repeats */
 .wcat__body .reel__group + .reel__group { display: none !important; }
 
-/* each tile = one masonry cell at its natural aspect ratio */
-.wcat__body .mreel-tile {
-  display: block;
-  width: 100%;
-  margin: 0 0 clamp(0.7rem, 1.4vw, 1.3rem);
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-}
+/* each tile = one uniform grid cell */
+.wcat__body .mreel-tile { margin: 0; display: block; }
 .wcat__body .mreel-tile:first-child { padding-left: 0; } /* drop the reel's full-bleed lead pad */
-.wcat__body .mreel-tile__media { height: auto; }
+.wcat__body .mreel-tile__media {
+  height: auto;
+  aspect-ratio: 4 / 5;          /* same shape for every tile -> aligned rows */
+}
 .wcat__body .mreel-tile__media img,
-.wcat__body .mreel-tile__media video { width: 100%; height: auto; }
+.wcat__body .mreel-tile__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* crop to fill the tile */
+}
 
-/* fewer columns as the screen narrows */
-@media (max-width: 1024px) { .wcat__body .media-reels { column-count: 3; } }
-@media (max-width: 600px)  { .wcat__body .media-reels { column-count: 2; } }
+@media (max-width: 1024px) { .wcat__body .media-reels { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px)  { .wcat__body .media-reels { grid-template-columns: repeat(2, 1fr); } }
