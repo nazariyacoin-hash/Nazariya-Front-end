@@ -24,7 +24,7 @@
     '/work/social/reel-wrii.belt.mp4',
     '/work/social/wrii-1.belt.jpg',
     '/work/content/insta-feed.belt.jpg',
-    '/work/packaging/cards-2.belt.jpg',
+    '/work/packaging/heritage.belt.jpg',
     '/work/content/jtd-3.belt.jpg',
   ];
   const TILT = 14;               // rotation across the belt, deg edge-to-edge

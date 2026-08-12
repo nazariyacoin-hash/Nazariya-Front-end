@@ -25,7 +25,7 @@
     ['Content<br>Production', 'content', ['/work/content/golgappa-1.jpg', '/work/content/semal-2.jpg', '/work/content/jtd-2.jpg', '/work/content/texture-1.jpg']],
     ['Social<br>Media', 'social', ['/work/social/wrii-1.jpg', '/work/social/wrii-2.jpg', '/work/social/wrii-3.jpg', '/work/social/wrii-4.jpg']],
     ['Printing &<br>Collaterals', 'print', ['/work/print/dye-mag.jpg', '/work/print/zine-disha.jpg', '/work/print/mag-mockup.jpg', '/work/print/zine-ishita.jpg']],
-    ['Design', 'packaging', ['/work/packaging/sabyasachi.jpg', '/work/packaging/cards-1.jpg', '/work/packaging/mcqueen.jpg', '/work/packaging/cards-2.jpg']],
+    ['Design', 'packaging', ['/work/packaging/sabyasachi.jpg', '/work/packaging/getting-ready.jpg', '/work/packaging/mcqueen.jpg', '/work/packaging/windows.jpg']],
   ];
   const COLOR_COUNT = 4;      // svc2__panel--c0..c3 in services-v2.css
   const DRIFT_LERP = 0.075;

@@ -1,18 +1,19 @@
 /* =============================================================
-   gallery-grid.css — /work galleries as a uniform ALIGNED GRID
-   (scroll down). Every tile is the same size, rows line up, and
-   the bottom ends level — no ragged masonry gaps. Images crop to
-   fill each tile (object-fit:cover). All devices: 4 / 3 / 2 cols.
+   gallery-grid.css — /work galleries scroll DOWN, packed columns,
+   images at their NATURAL proportions (no cropping/distortion).
+   Columns: 2 / 3 / 4 / 5 (mobile / tablet / desktop / ultrawide) —
+   more columns on wide screens keeps items shorter so the column
+   bottoms stay close together (less empty tail).
 
    The reel wrappers are flattened with display:contents so each
-   .mreel-tile becomes a direct grid item of .media-reels; the
-   duplicate seamless-loop group is hidden; the bundle's GSAP
+   .mreel-tile becomes a direct multi-column item of .media-reels;
+   the duplicate seamless-loop group is hidden; the bundle's GSAP
    horizontal tween then animates a box-less .reel__track (no-op).
    ============================================================= */
 .wcat__body .media-reels {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(0.5rem, 1vw, 1rem);
+  display: block;
+  column-count: 4;
+  column-gap: clamp(0.6rem, 1.2vw, 1.1rem);
 }
 .wcat__body .media-reel,
 .wcat__body .reel,
@@ -21,19 +22,23 @@
 /* seamless-loop duplicate copy — hide so nothing repeats */
 .wcat__body .reel__group + .reel__group { display: none !important; }
 
-/* each tile = one uniform grid cell */
-.wcat__body .mreel-tile { margin: 0; display: block; }
-.wcat__body .mreel-tile:first-child { padding-left: 0; } /* drop the reel's full-bleed lead pad */
-.wcat__body .mreel-tile__media {
-  height: auto;
-  aspect-ratio: 4 / 5;          /* same shape for every tile -> aligned rows */
+/* each tile keeps its natural aspect ratio */
+.wcat__body .mreel-tile {
+  display: block;
+  width: 100%;
+  margin: 0 0 clamp(0.6rem, 1.2vw, 1.1rem);
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
+.wcat__body .mreel-tile:first-child { padding-left: 0; }
+.wcat__body .mreel-tile__media { height: auto; aspect-ratio: auto; }
 .wcat__body .mreel-tile__media img,
 .wcat__body .mreel-tile__media video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;            /* crop to fill the tile */
+  height: auto;            /* natural proportion — no crop */
+  object-fit: fill;        /* moot at natural size; resets any inherited cover */
 }
 
-@media (max-width: 1024px) { .wcat__body .media-reels { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 600px)  { .wcat__body .media-reels { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1024px) { .wcat__body .media-reels { column-count: 3; } }
+@media (max-width: 600px)  { .wcat__body .media-reels { column-count: 2; } }
+@media (min-width: 1700px) { .wcat__body .media-reels { column-count: 5; } }
